@@ -49,8 +49,22 @@ var $d = new function()
 	this.LEGEND = function(attr, content) { return this.E('legend', attr, content); }
 	this.DATALIST = function(attr, content) { return this.E('datalist', attr, content); }
 	this.A = function(attr, content) { return this.E('a', attr, content); }
-	this.UL = function(attr, content) { return this.E('ul', attr, content); }
-	this.OL = function(attr, content) { return this.E('ol', attr, content); }
+	this.UL = function(attr, content) {
+		if (Array.isArray(content)) {
+			var carr = [];
+			for (let i in content) if (content[i]!='') carr.push(this.LI({}, content[i]));
+			content = carr;
+		}
+		return this.E('ul', attr, content);
+	}
+	this.OL = function(attr, content) {
+		if (Array.isArray(content)) {
+			var carr = [];
+			for (let i in content) carr.push(this.LI({}, content[i]));
+			content = carr;
+		}
+		return this.E('ol', attr, content);
+	}
 	this.LI = function(attr, content) { return this.E('li', attr, content); }
 	this.IMG = function(attr) { return this.E('img', attr); }
 	this.BR = function() { return this.E('br'); }
